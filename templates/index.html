@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malaria Prediction webapp</title>
+    <link rel="icon" type="image/png" href="../static/images/favicon.png">
+    <style>
+        body {
+            background-color: rgba(7, 7, 14, 0.897);
+            color: white
+        }
+
+        .head {
+            background-image: url('../static/images/ds2.png');
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+            height: 500px;
+            border-radius: 10px;
+
+        }
+
+        .tag {
+            font-size: 50px;
+            color: white;
+
+
+        }
+
+        .head .tag {
+            background-color: rgba(6, 1, 10, 0.76);
+            height: 500px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            margin: 10px 0 0 20px;
+            padding: 100px 0 0 100px;
+        }
+
+        #h1 {
+            font-size: 30px;
+            margin: 50px 0 0 90px;
+        }
+
+        .intro p {
+            margin: 0px 0 10px 0px;
+            border-radius: 5px;
+
+            padding: 10px;
+            font-size: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: rgba(6, 1, 10, 0.61);
+            letter-spacing: 1px;
+        }
+
+        ul {
+            font-size: 20px;
+        }
+
+        label {
+            font-size: 20px;
+        }
+
+        #col_1 {
+            width: 400px;
+            height: 750px;
+            /* background-color: blueviolet; */
+        }
+
+        #col_2 {
+            margin: -766px 0 0 450px;
+            height: 750px;
+            width: 400px;
+            padding: 0 0 0 10px;
+            /* background-color: aqua; */
+        }
+
+        #col_3 {
+            margin: -766px 0 0 900px;
+            height: 750px;
+            width: 400px;
+            padding: 0 0 0 10px;
+            /* background-color: blue; */
+        }
+
+        #base {
+            margin: -60px 0 0 0;
+            /* background-color: chartreuse; */
+        }
+
+        .btn {
+            font-size: 20px;
+            padding: 10px;
+            margin: 0 0 0 30px;
+            border-radius: 5px;
+            background-color: rgb(247, 179, 193);
+        }
+
+        #pred {
+            background-color: rgb(19, 14, 4);
+            width: 200px;
+            padding: 50px;
+            font-size: 20px;
+            /* border-radius: 20px; */
+            margin: 0 0 0px 400px;
+            /* display: inline; */
+        }
+
+        footer {
+
+            background-color: rgba(7, 7, 14, 0.719);
+            height: 400px;
+            background-attachment: scroll;
+            position: relative;
+
+        }
+
+        marquee {
+            background-color: black;
+            margin: 390px 0 0 0;
+            color: white;
+        }
+
+
+        .foot .footer {
+            background-image: url('../static/images/ds1.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="head">
+        <div class="tag">
+            <h1>Malaria Prediction System</h1>
+        </div>
+    </section>
+    <hr>
+    <section class="body">
+        <div class="intro">
+            <p>
+                Welcome to our Malaria Prediction System, this system can predict the whether or not an individual has
+                Maleria or not based on the
+                information He/She give the system. <br> <br>
+                All you need to do is fill the form below:
+            </p>
+
+        </div>
+
+        <hr>
+        <div class="params">
+            <form action="{{url_for('predict')}}" method="post">
+                <div id="col_1">
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;" for="">SEX:</label>
+                    </p>
+                    <select style="width:170px; height: 30px;" name="SEX">
+                        <option value="1">Male</option>
+                        <option value="0">Female</option>
+                    </select>
+                    </p>
+
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;" for="">AGE:</label>
+                    </p>
+                    <input style="width:160px; height: 25px;" type="number" placeholder="Enter your age"
+                        required='required' name="AGE">
+                    </p>
+
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;" for="">SEMESTER:</label>
+                    </p>
+                    <select style="width:170px; height: 30px;" name="SEMESTER">
+                        <option value="1">First</option>
+                        <option value="2">Second</option>
+                    </select>
+                    </p>
+
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;" for="">BODY
+                            TEMPERATURE:</label></p>
+                    <input style="width:160px; height: 25px;" type="number" step="any" placeholder="Enter float value"
+                        required='required' name="BODY TEMPERATURE">
+                    </p>
+
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;" for="">BP:</label></p>
+                    <select style="width:170px; height: 30px;" name="BP">
+                        <option value="1">High</option>
+                        <option value="0">Normal</option>
+                        <option value="-1">Low</option>
+                    </select>
+                    </p>
+
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;" for="">CATARRH:</label>
+                    </p>
+                    <select style="width:170px; height: 30px;" name="CATARRH">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                    </p>
+
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;" for="">COUGH:</label>
+                    </p>
+                    <select style="width:170px; height: 30px;" name="COUGH">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                    </p>
+
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;" for="">HEADACHE:</label>
+                    </p>
+                    <select style="width:170px; height: 30px;" name="HEADACHE">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                    </p>
+
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;" for="">FEVER:</label>
+                    </p>
+                    <select style="width:170px; height: 30px;" name="FEVER">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                    </p>
+
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;" for="">COLD:</label>
+                    </p>
+                    <select style="width:170px; height: 30px;" name="COLD">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                    </p>
+
+                </div>
+
+                <div id="col_2">
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;" for="">BODY
+                            PAIN:</label></p>
+                    <select style="width:170px; height: 30px;" name="BODY PAIN">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                    </p>
+
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;" for="">JOINT
+                            PAIN:</label></p>
+                    <select style="width:170px; height: 30px;" name="JOINT PAIN">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                    </p>
+
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;" for="">DIZZINESS:</label>
+                    </p>
+                    <select style="width:170px; height: 30px;" name="DIZZINESS">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                    </p>
+
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;" for="">BODY
+                            WEAKNESS:</label></p>
+                    <select style="width:170px; height: 30px;" name="BODY WEAKNESS">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                    </p>
+
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;" for="">DIARRHOEA:</label>
+                    </p>
+                    <select style="width:170px; height: 30px;" name="DIARRHOEA">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                    </p>
+
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;" for="">DYSENTERY
+                            STOOL:</label></p>
+                    <select style="width:170px; height: 30px;" name="DYSENTERY STOOL">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                    </p>
+
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;" for="">ABDOMINAL
+                            PAIN:</label></p>
+                    <select style="width:170px; height: 30px;" name="ABDOMINAL PAIN">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                    </p>
+
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;" for="">SWEATING:</label>
+                    </p>
+                    <select style="width:170px; height: 30px;" name="SWEATING">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                    </p>
+
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;"
+                            for="">SALIVATORY:</label></p>
+                    <select style="width:170px; height: 30px;" name="SALIVATORY">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                    </p>
+
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;" for="">SORE
+                            THROAT:</label></p>
+                    <select style="width:170px; height: 30px;" name="SORE THROAT">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                    </p>
+
+                </div>
+                <div id="col_3">
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;" for="">VOMITTING:</label>
+                    </p>
+                    <select style="width:170px; height: 30px;" name="VOMITTING">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                    </p>
+
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;" for="">INTERNAL
+                            HEAT:</label></p>
+                    <select style="width:170px; height: 30px;" name="INTERNAL HEAT">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                    </p>
+
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;" for="">MOUTH
+                            BITTERNESS:</label></p>
+                    <select style="width:170px; height: 30px;" name="MOUTH BITTERNESS">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                    </p>
+
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;" for="">SLEEPLESS:</label>
+                    </p>
+                    <select style="width:170px; height: 30px;" name="SLEEPLESS">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                    </p>
+
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;" for="">TIREDNESS:</label>
+                    </p>
+                    <select style="width:170px; height: 30px;" name="TIREDNESS">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                    </p>
+
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;" for="">NO
+                            APETITE:</label></p>
+                    <select style="width:170px; height: 30px;" name="NO APETITE">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                    </p>
+
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;" for="">BREATHING
+                            DIFFICULTY:</label></p>
+                    <select style="width:170px; height: 30px;" name="BREATHING DIFFICULTY">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                    </p>
+
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;" for="">CHEST
+                            PAIN:</label></p>
+                    <select style="width:170px; height: 30px;" name="CHEST PAIN">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                    </p>
+
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;" for="">NAUSEA:</label>
+                    </p>
+                    <select style="width:170px; height: 30px;" name="NAUSEA">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                    </p>
+
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;" for="">EYE
+                            ACHE:</label>
+                    </p>
+                    <select style="width:170px; height: 30px;" name="EYE ACHE">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                    </p>
+
+                    <p>
+                    <p style="margin: 16px 0 0 0;"><label
+                            style="font-size: 13px; font-family:Arial, Helvetica, sans-serif;" for="">RED
+                            EYE:</label>
+                    </p>
+                    <select style="width:170px; height: 30px;" name="RED EYE">
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                    </p>
+                </div>
+
+                <div id="base">
+                    <button type="submit" class="btn">Do I have Malaria?</button>
+
+                </div>
+            </form>
+            <br>
+            <br>
+            <p id="pred"><b>{{ prediction_text }}</b>.</p>
+
+            <br>
+            <br>
+        </div>
+
+        <hr>
+    </section>
+
+    <section class="foot">
+        <div class="footer">
+            <footer>
+                <marquee behavior="" direction="">_-_&copy;2022....Thank You.</marquee>
+            </footer>
+        </div>
+    </section>
+
+</body>
+
+</html>
